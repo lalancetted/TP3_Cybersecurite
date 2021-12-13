@@ -1,0 +1,34 @@
+Ne pas mettre les jetons CSRF dans un champ caché.
+Mettre les jetons CSRF dans un header HTTP crée dans du JavaScript.
+
+Ne pas transmettre les jetons CSRF par les cookies.
+
+Demander à l'utilisateur de confirmer pour les actions dangereuses.
+
+Demander à l'utilisateur de confirmer un ancien mot de passe pour changer son adresse courriel.
+
+Utiliser des jetons de validité dans les formulaires.
+
+Ne pas utiliser des requêtes GET pour effectuer des actions comportant des données personelles.
+
+
+Source : flask-wtf.readthedocs.io/en/0.15.x/csrf/
+Au lieu d'utiliser app.run(), faire ceci:
+from flask_wtf.csrf import CSRFProtect
+csrf = CSRFProtect(app)
+
+...
+
+csrf.init_app(app)
+
+
+OU
+
+# Source : towardsdatascience.com/how-to-secure-your-machine-learning-app-with-csrf-protection-506c3383f9e5
+app = Flask(__name__)
+app.config['WTF_CSRF_TIME_LIMIT'] = WTF_CSRF_TIME_LIMIT
+CSRFProtect(app)
+
+
+Dans un form (méthode POST) d'un fichier html :
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
